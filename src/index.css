@@ -1,14 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-
   html {
     scroll-behavior: smooth;
   }
@@ -16,126 +12,80 @@
   body {
     margin: 0;
     font-family: 'DM Sans', system-ui, sans-serif;
-    background-color: #F4F4F4;
-    color: #172A43;
+    background-color: #FAFBFD;
+    color: #0B1B33;
     -webkit-font-smoothing: antialiased;
   }
 
   #root {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    text-align: left;
-    border: none;
     min-height: 100svh;
     display: flex;
     flex-direction: column;
   }
 
-  h1, h2, h3, h4 {
+  h1, h2, h3 {
     font-family: 'Playfair Display', Georgia, serif;
     font-weight: 600;
-    color: #172A43;
-    line-height: 1.2;
+    line-height: 1.15;
+    text-wrap: balance;
   }
 
-  p {
-    margin: 0;
+  :focus-visible {
+    outline: 3px solid #2D66B8;
+    outline-offset: 3px;
+    border-radius: 2px;
   }
 }
 
 @layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-content px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-[0.95rem] font-semibold tracking-wide transition-colors duration-200;
+  }
   .btn-primary {
-    @apply inline-flex items-center justify-center px-7 py-3 bg-forest text-white font-sans font-600 text-base tracking-wide rounded-sm transition-all duration-200 hover:bg-forest-light hover:shadow-lg active:scale-95;
-    font-weight: 600;
-    letter-spacing: 0.04em;
+    @apply btn bg-brand text-white hover:bg-brand-light;
+  }
+  .btn-light {
+    @apply btn bg-white text-brand hover:bg-mist;
+  }
+  .btn-ghost-light {
+    @apply btn border border-white/60 text-white hover:bg-white/10;
+  }
+  .btn-ghost {
+    @apply btn border border-brand/40 text-brand hover:border-brand hover:bg-brand-soft/50;
   }
 
-  .btn-outline-white {
-    @apply inline-flex items-center justify-center px-7 py-3 border-2 border-white text-white font-sans font-500 text-base tracking-wide rounded-sm transition-all duration-200 hover:bg-white hover:text-forest active:scale-95;
-    font-weight: 500;
-    letter-spacing: 0.04em;
+  .eyebrow {
+    @apply mb-3 block text-xs font-semibold uppercase tracking-[0.18em] text-brand-light;
   }
-
-  .btn-outline-forest {
-    @apply inline-flex items-center justify-center px-7 py-3 border-2 border-forest text-forest font-sans font-500 text-base tracking-wide rounded-sm transition-all duration-200 hover:bg-forest hover:text-white active:scale-95;
-    font-weight: 500;
-    letter-spacing: 0.04em;
+  .h-section {
+    @apply font-serif text-3xl text-ink sm:text-4xl md:text-[2.75rem];
   }
-
-  .section-label {
-    @apply text-forest-light font-sans font-600 text-sm tracking-widest uppercase mb-3;
-    font-weight: 600;
+  .lede {
+    @apply text-lg leading-relaxed text-slate;
   }
-
-  .section-title {
-    @apply font-serif text-4xl md:text-5xl text-forest leading-tight;
+  .card {
+    @apply rounded-2xl border border-mist bg-white shadow-[0_1px_2px_rgba(11,27,51,0.04)];
   }
-
-  .section-body {
-    @apply font-sans text-forest-muted text-lg leading-relaxed;
-  }
-
-  .card-premium {
-    @apply bg-white rounded-sm border border-cream-dark shadow-sm hover:shadow-md transition-shadow duration-300;
-  }
-
-  .divider-accent {
-    @apply w-16 h-0.5 bg-forest-light;
+  .tba {
+    @apply inline-flex items-center gap-2 rounded-full border border-dashed border-brand/40 bg-brand-soft/40 px-3 py-1 text-sm font-medium text-brand;
   }
 }
 
-@layer utilities {
-  .font-500 { font-weight: 500; }
-  .font-600 { font-weight: 600; }
-  .text-balance { text-wrap: balance; }
-}
-
-/* Scroll-triggered fade-up animations */
+/* Gentle fade-in as sections enter the viewport. Off for anyone who prefers reduced motion. */
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
-
 .reveal.visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
-
-/* Page transition wrapper */
-.page-enter {
-  animation: fadeIn 0.4s ease-out forwards;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* Staggered children */
-.stagger > * { opacity: 0; transform: translateY(20px); }
-.stagger.visible > *:nth-child(1) { animation: fadeUp 0.6s 0.05s ease-out forwards; }
-.stagger.visible > *:nth-child(2) { animation: fadeUp 0.6s 0.15s ease-out forwards; }
-.stagger.visible > *:nth-child(3) { animation: fadeUp 0.6s 0.25s ease-out forwards; }
-.stagger.visible > *:nth-child(4) { animation: fadeUp 0.6s 0.35s ease-out forwards; }
-.stagger.visible > *:nth-child(5) { animation: fadeUp 0.6s 0.45s ease-out forwards; }
-.stagger.visible > *:nth-child(6) { animation: fadeUp 0.6s 0.55s ease-out forwards; }
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* Lightbox overlay */
-.lightbox-overlay {
-  backdrop-filter: blur(8px);
-}
-
-/* Counter number style */
-.counter-number {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-weight: 700;
-  color: #1E5FAA;
-  line-height: 1;
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
 }

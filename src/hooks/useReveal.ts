@@ -1,45 +1,28 @@
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 
+/** Adds `visible` to every `.reveal` element as it scrolls into view. Re-runs on each page. */
 export function useReveal() {
+  const { pathname } = useLocation()
+
   useEffect(() => {
+    const elements = document.querySelectorAll('.reveal:not(.visible)')
+    if (!('IntersectionObserver' in window)) {
+      elements.forEach((el) => el.classList.add('visible'))
+      return
+    }
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible')
+            observer.unobserve(entry.target)
           }
         })
       },
-      { threshold: 0.12 }
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' },
     )
-
-    const elements = document.querySelectorAll('.reveal, .stagger')
     elements.forEach((el) => observer.observe(el))
-
     return () => observer.disconnect()
-  }, [])
-}
-
-export function useRevealRef<T extends HTMLElement>() {
-  const ref = useRef<T>(null)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add('visible')
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.12 }
-    )
-
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
-
-  return ref
+  }, [pathname])
 }

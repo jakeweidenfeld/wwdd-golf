@@ -3,41 +3,21 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      // WWDD palette, taken from the logo's blue (#164386). Blue and white only.
       colors: {
-        forest: {
-          DEFAULT: '#172A43',
-          dark: '#0F1E33',
-          light: '#1E5FAA',
-          muted: '#4a78c0',
-        },
-        cream: {
-          DEFAULT: '#F4F4F4',
-          dark: '#E8EDF5',
-          light: '#FFFFFF',
-        },
+        ink: '#0B1B33',
+        navy: { DEFAULT: '#0F2A52', deep: '#0A1D3A' },
+        brand: { DEFAULT: '#164386', light: '#2D66B8', soft: '#DCE7F6' },
+        sky: '#9CC3EE',
+        mist: '#EEF3F9',
+        paper: '#FAFBFD',
+        slate: { DEFAULT: '#4A5B74', light: '#6B7B93' },
       },
       fontFamily: {
         serif: ['"Playfair Display"', 'Georgia', 'serif'],
         sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
       },
-      keyframes: {
-        fadeUp: {
-          '0%': { opacity: '0', transform: 'translateY(28px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        shimmer: {
-          '0%': { backgroundPosition: '-200% center' },
-          '100%': { backgroundPosition: '200% center' },
-        },
-      },
-      animation: {
-        'fade-up': 'fadeUp 0.7s ease-out forwards',
-        'fade-in': 'fadeIn 0.9s ease-out forwards',
-      },
+      maxWidth: { content: '72rem' },
     },
   },
   plugins: [],
