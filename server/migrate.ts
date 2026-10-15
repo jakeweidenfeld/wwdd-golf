@@ -10,6 +10,12 @@ const dir = path.join(path.dirname(fileURLToPath(import.meta.url)), 'migrations'
 
 async function main() {
   const url = process.env.DATABASE_URL
+  // On Vercel, only production builds touch the database. Preview deploys share these settings
+  // and must never change production's schema.
+  if (process.env.VERCEL && process.env.VERCEL_ENV !== 'production') {
+    console.log(`migrate: skipping on a ${process.env.VERCEL_ENV} deploy.`)
+    return
+  }
   if (!url) {
     if (process.env.VERCEL_ENV === 'production') throw new Error('DATABASE_URL is not set for production.')
     console.log('migrate: DATABASE_URL not set, skipping.')
