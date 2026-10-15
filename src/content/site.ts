@@ -27,6 +27,8 @@ export const contact = {
     org: 'Experience Camps',
     email: 'kristen.braunschweig@experiencecamps.org',
   },
+  // Shown on the privacy policy for deletion requests. Set this before publishing the Google sign-in app.
+  privacy: null as string | null,
   // Add a WWDD email, Instagram, Facebook, etc. here when ready.
   social: [] as { label: string; href: string }[],
 }

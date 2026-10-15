@@ -66,7 +66,7 @@ export default function Footer() {
       </div>
       <div className="border-t border-white/10">
         <div className="container-page flex flex-col gap-2 py-6 text-xs text-white/50 sm:flex-row sm:justify-between">
-          <p>© {new Date().getFullYear()} WWDD Charity Golf Tournament</p>
+          <p>© {new Date().getFullYear()} WWDD Charity Golf Tournament · <Link to="/privacy" className="underline underline-offset-2 hover:text-white">Privacy</Link></p>
           <p>Registration, sponsorships and donations are processed by Experience Camps through GiveSmart.</p>
         </div>
       </div>
