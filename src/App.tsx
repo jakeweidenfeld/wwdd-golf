@@ -9,6 +9,9 @@ import Register from './pages/Register'
 import Sponsor from './pages/Sponsor'
 import Donate from './pages/Donate'
 import Impact from './pages/Impact'
+import SignIn from './pages/SignIn'
+import Members from './pages/Members'
+import Admin from './pages/Admin'
 
 function NotFound() {
   return (
@@ -34,6 +37,9 @@ export default function App() {
           <Route path="/sponsor" element={<Sponsor />} />
           <Route path="/donate" element={<Donate />} />
           <Route path="/impact" element={<Impact />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/members" element={<Members />} />
+          <Route path="/admin" element={<Admin />} />
           {/* Paths from the earlier version of the site */}
           <Route path="/event-info" element={<Navigate to="/tournament" replace />} />
           <Route path="/sponsors" element={<Navigate to="/sponsor" replace />} />

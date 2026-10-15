@@ -51,6 +51,12 @@ export default function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <NavLink
+            to="/members"
+            className={({ isActive }) => `hidden rounded-full px-4 py-2 text-sm font-medium sm:inline-flex ${isActive ? 'bg-white/15 text-white' : 'text-white/80 hover:text-white'}`}
+          >
+            Members
+          </NavLink>
           <Link to="/donate" className="btn-light hidden px-5 py-2.5 text-sm sm:inline-flex">
             Donate
           </Link>
@@ -71,7 +77,7 @@ export default function Navbar() {
 
       <nav id="mobile-menu" aria-label="Mobile" hidden={!open} className="border-t border-white/10 lg:hidden">
         <div className="container-page flex flex-col gap-1 py-4">
-          {[{ label: 'Home', path: '/' }, ...navLinks, { label: 'Donate', path: '/donate' }].map((l) => (
+          {[{ label: 'Home', path: '/' }, ...navLinks, { label: 'Members', path: '/members' }, { label: 'Donate', path: '/donate' }].map((l) => (
             <NavLink
               key={l.path}
               to={l.path}

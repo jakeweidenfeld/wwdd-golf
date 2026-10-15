@@ -1,3 +1,7 @@
 {
-  "rewrites": [{ "source": "/((?!images/|assets/).*)", "destination": "/index.html" }]
+  "buildCommand": "npm test && npm run migrate && npm run build",
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api" },
+    { "source": "/((?!api/|api$|images/|assets/).*)", "destination": "/index.html" }
+  ]
 }
